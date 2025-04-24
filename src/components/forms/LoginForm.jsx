@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
-import * as yup from "yup"
+import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 
 const yupSchema = yup.object().shape({
-    username: yup.string().required("Pole username jest wymagane"),
-    password: yup.string().required("Pole hasło jest wymagane")
-})
+  username: yup.string().required("Pole username jest wymagane"),
+  password: yup.string().required("Pole hasło jest wymagane"),
+});
 
 export default function LoginForm() {
   const {
@@ -14,17 +14,20 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(yupSchema)
+    resolver: yupResolver(yupSchema),
   });
 
   const onSubmit = async (data) => {
     console.log("Dane formularza:", data);
     // Tutaj dodamy później logikę logowania
     try {
-        const response = await axios.post("https://fakestoreapi.com/auth,login", data)
-        console.log(response);
-    } catch(e) {
-        console.log(e)
+      const response = await axios.post(
+        "https://fakestoreapi.com/auth,login",
+        data
+      );
+      console.log(response);
+    } catch (e) {
+      console.log(e);
     }
   };
 
