@@ -34,7 +34,7 @@ export default function LoginForm() {
         data
       );
       console.log(response);
-      if (response) {
+      if (response.data) {
         setSuccess(true);
         reset();
       }
