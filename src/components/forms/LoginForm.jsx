@@ -26,7 +26,7 @@ export default function LoginForm() {
     console.log("Dane formularza:", data);
     setApiError(null);
     setSuccess(false);
-    setIsFormSubmitting(true)
+    setIsFormSubmitting(true);
     // Tutaj dodamy później logikę logowania
     try {
       const response = await axios.post(
