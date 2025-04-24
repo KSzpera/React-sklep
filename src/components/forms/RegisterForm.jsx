@@ -1,4 +1,30 @@
 import { useForm } from "react-hook-form";
+import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const yupSchema = yup.object().shape({
+    username: yup
+    .string()
+    .required("Pole username jest wymagane")
+    .min(3, "Nazwa powinna mieć minimum 3 znaki")
+    .max(20, "Nazwa powinna mieć maksymalnie 20 znaków"),
+    email: yup
+    .string()
+    .required("Email jest wymagany")
+    .email("Nieprawidłowy format email"),
+    password: yup
+    .string()
+    .required("Pole hasło jest wymagane")
+    .min(12, "Hasło powinno mieć minimum 12 znaków")
+    .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+        "Hasło musi zawierać: 1 dużą literę, 1 małą literę i 1 cyfrę"
+    ),
+    confirmPassword: yup
+    .string()
+    .required("Potwierdzenie hasła jest wymagane")
+    .oneOf([yup.ref('password')], "Hasła muszą być identyczne"),
+})
 
 export default function ReisterForm() {
   const {
@@ -6,7 +32,9 @@ export default function ReisterForm() {
     handleSubmit,
     formState: { errors },
     watch
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(yupSchema)
+  });
 
   const onSubmit = async (data) => {
     console.log("Dane formularza:", data);
@@ -64,18 +92,18 @@ export default function ReisterForm() {
         <label>Potwierdź hasło</label>
         <input
           type="password"
-          {...register("passwordConfirmation", {
+          {...register("confirmPassword", {
             required: "Potwierdzenie hasła jest wymagane",
             validate: (value) =>
               value === currentPassword || "Hasła nie są takie same",
           })}
           className={
-            errors.passwordConfirmation ? "border-red-500" : "border-gray-500"
+            errors.confirmPassword ? "border-red-500" : "border-gray-500"
           }
         />
-        {errors.passwordConfirmation && (
+        {errors.confirmPassword && (
           <span className="text-red-500">
-            {errors.passwordConfirmation.message}
+            {errors.confirmPassword.message}
           </span>
         )}
       </div>
