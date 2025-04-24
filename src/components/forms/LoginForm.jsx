@@ -17,6 +17,7 @@ export default function LoginForm() {
     register,
     handleSubmit,
     formState: { errors, isSubmititng },
+    reset,
   } = useForm({
     resolver: yupResolver(yupSchema),
   });
@@ -24,6 +25,8 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     console.log("Dane formularza:", data);
     setApiError(null);
+    setSuccess(false);
+    setIsFormSubmitting(true)
     // Tutaj dodamy później logikę logowania
     try {
       const response = await axios.post(
@@ -52,7 +55,7 @@ export default function LoginForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="speca-y-4 mt-10">
       <h1>Logowanie</h1>
       {apiError && <span>{apiError}</span>}
-      {success && <span>{success}</span>}
+      {success && <span>Sukces</span>}
       <div className="flex flex-col">
         <label>Username</label>
         <input
@@ -64,7 +67,6 @@ export default function LoginForm() {
           <span className="text-red-500">{errors.username.message}</span>
         )}
       </div>
-
       <div className="flex flex-col">
         <label>Hasło</label>
         <input
@@ -76,7 +78,6 @@ export default function LoginForm() {
           <span className="text-red-500">{errors.password.message}</span>
         )}
       </div>
-
       <button
         type="submit"
         className="btn-primary"
