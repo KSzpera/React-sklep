@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 
 const yupSchema = yup.object().shape({
     username: yup.string().required("Pole username jest wymagane"),
@@ -19,6 +20,12 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     console.log("Dane formularza:", data);
     // Tutaj dodamy później logikę logowania
+    try {
+        const response = await axios.post("https://fakestoreapi.com/auth,login", data)
+        console.log(response);
+    } catch(e) {
+        console.log(e)
+    }
   };
 
   return (
