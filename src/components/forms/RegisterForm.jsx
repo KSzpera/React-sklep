@@ -1,46 +1,53 @@
 import { useForm } from "react-hook-form";
-import * as yup from "yup"
+import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 
 const yupSchema = yup.object().shape({
-    username: yup
+  username: yup
     .string()
     .required("Pole username jest wymagane")
     .min(3, "Nazwa powinna mieć minimum 3 znaki")
     .max(20, "Nazwa powinna mieć maksymalnie 20 znaków"),
-    email: yup
+  email: yup
     .string()
     .required("Email jest wymagany")
     .email("Nieprawidłowy format email"),
-    password: yup
+  password: yup
     .string()
     .required("Pole hasło jest wymagane")
     .min(12, "Hasło powinno mieć minimum 12 znaków")
     .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-        "Hasło musi zawierać: 1 dużą literę, 1 małą literę i 1 cyfrę"
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+      "Hasło musi zawierać: 1 dużą literę, 1 małą literę i 1 cyfrę"
     ),
-    confirmPassword: yup
+  confirmPassword: yup
     .string()
     .required("Potwierdzenie hasła jest wymagane")
-    .oneOf([yup.ref('password')], "Hasła muszą być identyczne"),
-})
+    .oneOf([yup.ref("password")], "Hasła muszą być identyczne"),
+});
 
 export default function ReisterForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
   } = useForm({
-    resolver: yupResolver(yupSchema)
+    resolver: yupResolver(yupSchema),
   });
 
   const onSubmit = async (data) => {
     console.log("Dane formularza:", data);
+    try {
+      const response = await axios.post("https://fakestoreapi.com/users", data);
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const currentPassword = watch("password")
+  const currentPassword = watch("password");
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="speca-y-4 mt-10">
@@ -102,9 +109,7 @@ export default function ReisterForm() {
           }
         />
         {errors.confirmPassword && (
-          <span className="text-red-500">
-            {errors.confirmPassword.message}
-          </span>
+          <span className="text-red-500">{errors.confirmPassword.message}</span>
         )}
       </div>
 

@@ -22,7 +22,7 @@ export default function LoginForm() {
     // Tutaj dodamy później logikę logowania
     try {
       const response = await axios.post(
-        "https://fakestoreapi.com/auth,login",
+        "https://fakestoreapi.com/auth/login",
         data
       );
       console.log(response);
