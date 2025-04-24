@@ -40,10 +40,14 @@ export default function ReisterForm() {
   const onSubmit = async (data) => {
     console.log("Dane formularza:", data);
     try {
-      const response = await axios.post("https://fakestoreapi.com/users", data);
-      console.log(response);
+      const response = await axios.post("https://fakestoreapi.com/users", {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      });
+      console.log(response, "___");
     } catch (e) {
-      console.log(e);
+      console.log(e, "___");
     }
   };
 
