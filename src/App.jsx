@@ -15,8 +15,8 @@ function App() {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {/* Header user={mockUser} />
-      <ProductList/> */
-      /* <LoginForm /> */}
+      <ProductList/> */}
+      <LoginForm />
       <ReisterForm />
     </div>
   )

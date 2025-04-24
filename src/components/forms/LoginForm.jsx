@@ -1,11 +1,20 @@
 import { useForm } from "react-hook-form";
+import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const yupSchema = yup.object().shape({
+    username: yup.string().required("Pole username jest wymagane"),
+    password: yup.string().required("Pole hasło jest wymagane")
+})
 
 export default function LoginForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(yupSchema)
+  });
 
   const onSubmit = async (data) => {
     console.log("Dane formularza:", data);
