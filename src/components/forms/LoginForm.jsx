@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
+import { useState } from "react";
 
 const yupSchema = yup.object().shape({
   username: yup.string().required("Pole username jest wymagane"),
@@ -9,16 +10,20 @@ const yupSchema = yup.object().shape({
 });
 
 export default function LoginForm() {
+  const [apiError, setApiError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [isFormSubmitting, setIsFormSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmititng },
   } = useForm({
     resolver: yupResolver(yupSchema),
   });
 
   const onSubmit = async (data) => {
     console.log("Dane formularza:", data);
+    setApiError(null);
     // Tutaj dodamy później logikę logowania
     try {
       const response = await axios.post(
@@ -26,14 +31,28 @@ export default function LoginForm() {
         data
       );
       console.log(response);
+      if (response) {
+        setSuccess(true);
+        reset();
+      }
+      setIsFormSubmitting(false);
     } catch (e) {
-      console.log(e);
+      if (e.status === 401) {
+        setApiError(
+          "Dane logowania są niepoprawne lub użytkownik nie istnieje"
+        );
+      } else {
+        setApiError("Wystąpił nieznany błąd");
+      }
+      setIsFormSubmitting(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="speca-y-4 mt-10">
       <h1>Logowanie</h1>
+      {apiError && <span>{apiError}</span>}
+      {success && <span>{success}</span>}
       <div className="flex flex-col">
         <label>Username</label>
         <input
@@ -58,7 +77,11 @@ export default function LoginForm() {
         )}
       </div>
 
-      <button type="submit" className="btn-primary">
+      <button
+        type="submit"
+        className="btn-primary"
+        disabled={isFormSubmitting || isFormSubmitting}
+      >
         Zaloguj się
       </button>
     </form>
