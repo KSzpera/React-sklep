@@ -48,11 +48,13 @@ export default function RegisterForm() {
         email: data.email,
         password: data.password,
       });
-      console.log(response, "___");
-      navigate("/login");
-      console.log("Utworzono konto")
+      // console.log(response, "___");
+      if (response.data) {
+        navigate("/login", { state: { fromRegister: true } });
+      }
+      console.log("Utworzono konto");
     } catch (e) {
-      // console.log(e, "___");
+      console.log(e, "___");
     }
   };
 

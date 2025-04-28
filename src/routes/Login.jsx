@@ -1,10 +1,13 @@
 import LoginForm from "../components/forms/LoginForm";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const LoginPage = () => {
+  const location = useLocation();
+  console.log(location);
+  const fromRegister = location?.state?.fromRegister;
   return (
     <>
-      <LoginForm />
+      <LoginForm fromRegister={fromRegister} />
       <div>
         <p>Nie masz konta?</p>
         <Link to="/register">Zarejestruj się</Link>

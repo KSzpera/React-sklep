@@ -10,7 +10,7 @@ const yupSchema = yup.object().shape({
   password: yup.string().required("Pole hasło jest wymagane"),
 });
 
-export default function LoginForm() {
+export default function LoginForm({fromRegister = false}) {
   const [apiError, setApiError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
@@ -30,7 +30,7 @@ export default function LoginForm() {
     setApiError(null);
     setSuccess(false);
     setIsFormSubmitting(true);
-    // Tutaj dodamy później logikę logowania
+    // Logika logowania
     try {
       const response = await axios.post(
         "https://fakestoreapi.com/auth/login",
@@ -58,6 +58,11 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="speca-y-4 mt-10">
       <h1>Logowanie</h1>
+      {fromRegister && (
+        <span className="text-green-500">
+          Rejestracja zakończona sukcesem. Możesz się zalogować.
+        </span>
+      )}
       {apiError && <span>{apiError}</span>}
       {success && <span>Sukces</span>}
       <div className="flex flex-col">
