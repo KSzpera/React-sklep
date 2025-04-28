@@ -5,6 +5,7 @@ import HomePage from "./routes/Home";
 import LoginPage from "./routes/Login";
 import RegisterPage from "./routes/Register";
 import ProductsPage from "./routes/Products";
+import ProductDetailsPage from "./routes/ProductDetails";
 // import Header from "./components/Header";
 // import ProductList from "./components/product/ProductList";
 // import LoginForm from "./components/forms/LoginForm";
@@ -31,6 +32,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/products" element={<ProductsPage />} />
+      <Route path="/products/:id" element={<ProductDetailsPage />} />
     </Routes>
   );
 }
