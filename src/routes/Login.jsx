@@ -14,6 +14,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (user) navigate("/products");
   }, [user]);
+  
   return (
     <>
       <LoginForm fromRegister={fromRegister} />

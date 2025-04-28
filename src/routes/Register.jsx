@@ -7,9 +7,11 @@ const RegisterPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   console.log(user);
+
   useEffect(() => {
     if (user) navigate("/products");
   }, [user]);
+
   return (
     <>
       <RegisterForm />
