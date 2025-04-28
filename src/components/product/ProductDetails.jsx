@@ -9,7 +9,6 @@ const ProductDetails = ({ id }) => {
     <>
       <p>Szczegóły produktu:</p>
       <h2 className="text-2xl">{data?.title}</h2>
-      <img src={data.image} width="300"></img> 
       <p>{data?.description}</p>
     </>
   );

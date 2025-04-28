@@ -1,10 +1,19 @@
 import LoginForm from "../components/forms/LoginForm";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import { useEffect, useState } from "react";
 
 const LoginPage = () => {
   const location = useLocation();
   console.log(location);
   const fromRegister = location?.state?.fromRegister;
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  console.log(user);
+
+  useEffect(() => {
+    if (user) navigate("/products");
+  }, [user]);
   return (
     <>
       <LoginForm fromRegister={fromRegister} />

@@ -10,7 +10,7 @@ const yupSchema = yup.object().shape({
   password: yup.string().required("Pole hasło jest wymagane"),
 });
 
-export default function LoginForm({fromRegister = false}) {
+export default function LoginForm({ fromRegister = false }) {
   const [apiError, setApiError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
@@ -40,6 +40,7 @@ export default function LoginForm({fromRegister = false}) {
       if (response.data) {
         setSuccess(true);
         reset();
+        localStorage.setItem("authToken", response.data.token);
         navigate("/products");
       }
       setIsFormSubmitting(false);
