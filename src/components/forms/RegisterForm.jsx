@@ -27,7 +27,7 @@ const yupSchema = yup.object().shape({
     .oneOf([yup.ref("password")], "Hasła muszą być identyczne"),
 });
 
-export default function ReisterForm() {
+export default function RegisterForm() {
   const {
     register,
     handleSubmit,
