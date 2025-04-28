@@ -50,8 +50,9 @@ export default function RegisterForm() {
       });
       console.log(response, "___");
       navigate("/login");
+      console.log("Utworzono konto")
     } catch (e) {
-      console.log(e, "___");
+      // console.log(e, "___");
     }
   };
 
