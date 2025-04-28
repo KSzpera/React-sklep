@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import HomePage from "./routes/Home";
 import LoginPage from "./routes/Login";
@@ -21,7 +21,7 @@ function App() {
   return (
     // <div style={{ display: "flex", flexDirection: "column" }}>
     //   Header user={mockUser} />
-    //   <ProductList/>
+    //   <ProductList />
     //   <LoginForm />
     //   <RegisterForm />
     //   <ProductForm />
