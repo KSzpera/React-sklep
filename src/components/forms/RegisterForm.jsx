@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const yupSchema = yup.object().shape({
   username: yup
@@ -37,6 +38,8 @@ export default function RegisterForm() {
     resolver: yupResolver(yupSchema),
   });
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     console.log("Dane formularza:", data);
     try {
@@ -46,6 +49,7 @@ export default function RegisterForm() {
         password: data.password,
       });
       console.log(response, "___");
+      navigate("/login");
     } catch (e) {
       console.log(e, "___");
     }

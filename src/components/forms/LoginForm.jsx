@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const yupSchema = yup.object().shape({
   username: yup.string().required("Pole username jest wymagane"),
@@ -22,6 +23,8 @@ export default function LoginForm() {
     resolver: yupResolver(yupSchema),
   });
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     console.log("Dane formularza:", data);
     setApiError(null);
@@ -37,6 +40,7 @@ export default function LoginForm() {
       if (response.data) {
         setSuccess(true);
         reset();
+        navigate("/products");
       }
       setIsFormSubmitting(false);
     } catch (e) {
