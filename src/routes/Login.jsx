@@ -7,14 +7,18 @@ const LoginPage = () => {
   const location = useLocation();
   console.log(location);
   const fromRegister = location?.state?.fromRegister;
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const navigate = useNavigate();
   console.log(user);
 
   useEffect(() => {
-    if (user) navigate("/products");
-  }, [user]);
-  
+    if (!loading && user) {
+      navigate("/products");
+    }
+  }, [user, loading]);
+
+  if (loading) return <div>Loading...</div>;
+
   return (
     <>
       <LoginForm fromRegister={fromRegister} />

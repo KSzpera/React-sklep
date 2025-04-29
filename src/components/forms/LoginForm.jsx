@@ -41,7 +41,7 @@ export default function LoginForm({ fromRegister = false }) {
         setSuccess(true);
         reset();
         localStorage.setItem("authToken", response.data.token);
-        navigate("/products");
+        window.location.reload(); // 🔁 odśwież stronę = useAuth wykryje token
       }
       setIsFormSubmitting(false);
     } catch (e) {
