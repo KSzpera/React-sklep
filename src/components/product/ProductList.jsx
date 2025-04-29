@@ -6,8 +6,6 @@ import { fetcher } from "../../utils/fetch";
 import ProductDetails from "./ProductDetails";
 
 const ProductList = () => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  console.log(selectedProduct)
   const { data, error, isLoading } = useSWR(
     "https://fakestoreapi.com/products",
     fetcher
@@ -16,17 +14,24 @@ const ProductList = () => {
   if (isLoading) {
     return <p>Trwa ładowanie</p>;
   }
+
   if (error) {
-    return <p>Wystąpił błąd</p>;
+    return;
+    console.log("Błąd:", error);
+    <p>Wystąpił błąd</p>;
   }
+
   return (
     <div className="flex flex-row space-between">
-    <div className={styles.container}>
-      {data.map((product) => (
-        <ProductCard key={product.id} product={product} onClick={() => setSelectedProduct(product)}/>
-      ))}
-    </div>
-    <ProductDetails selectedProduct={selectedProduct} />
+      <div className={styles.container}>
+        {data.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onClick={() => setSelectedProduct(product)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
