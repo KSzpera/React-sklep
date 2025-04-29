@@ -13,7 +13,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (!loading && user) {
-      navigate("/products");
+      navigate("/products", { state: { fromLogin: true } });
     }
   }, [user, loading]);
 

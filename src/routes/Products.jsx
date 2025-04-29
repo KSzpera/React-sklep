@@ -7,7 +7,7 @@ const ProductsPage = () => {
 
   return (
     <>
-      {fromLogin && <span className="text-green">Logowanie się powiodło</span>}
+      {fromLogin && <span className="text-green-600 font-medium mb-4 block">Logowanie się powiodło</span>}
       <ProductList />;
     </>
   );
