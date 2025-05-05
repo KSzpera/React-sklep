@@ -7,6 +7,7 @@ import ProductsPage from "./routes/Products";
 import ProductDetailsPage from "./routes/ProductDetails";
 import MainLayout from "./layouts/MainLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Cart from "./routes/Cart";
 
 function App() {
   return (
@@ -26,6 +27,14 @@ function App() {
           element={
             <ProtectedRoute>
               <ProductDetailsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="cart"
+          element={
+            <ProtectedRoute>
+              <Cart />
             </ProtectedRoute>
           }
         />
