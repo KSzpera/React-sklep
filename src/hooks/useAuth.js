@@ -1,16 +1,8 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
-export function useAuth() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+const useAuth = () => {
+  return useContext(AuthContext);
+};
 
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      setUser(token);
-    }
-    setLoading(false);
-  }, []);
-
-  return { user, loading };
-}
+export default useAuth;
