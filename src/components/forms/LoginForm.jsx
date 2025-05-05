@@ -40,11 +40,11 @@ export default function LoginForm({ fromRegister = false }) {
       );
       // console.log(response);
       if (response.data.token) {
-        login(response.data.token, response.data)
+        login(response.data.token, response.data);
         setSuccess(true);
         reset();
         navigate("/products", {
-          state: { fromLogin: true }
+          state: { fromLogin: true },
         });
       }
       setIsFormSubmitting(false);
@@ -53,9 +53,9 @@ export default function LoginForm({ fromRegister = false }) {
         setApiError(
           "Dane logowania są niepoprawne lub użytkownik nie istnieje"
         );
-        console.log("Błąd logowania:", e);
       } else {
         setApiError("Wystąpił nieznany błąd");
+        console.log("Błąd logowania:", e);
       }
       setIsFormSubmitting(false);
     }
