@@ -25,8 +25,7 @@ const MainLayout = () => {
               </NavLink>
               <button
                 onClick={handleLogout}
-                className="ml-4 bg-red-600 px-3 py-1 rounded hover:bg-red-700"
-              >
+                className="ml-4 bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                 Wyloguj
               </button>
             </>
