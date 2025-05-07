@@ -17,13 +17,11 @@ const ProductList = () => {
 
   if (error) {
     return;
-    console.log("Błąd:", error);
-    <p>Wystąpił błąd</p>;
   }
 
   return (
-    <div className="flex flex-row space-between">
-      <div className={styles.container}>
+    <div className="px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {data.map((product) => (
           <ProductCard
             key={product.id}

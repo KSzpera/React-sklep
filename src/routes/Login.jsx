@@ -1,23 +1,19 @@
 import LoginForm from "../components/forms/LoginForm";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 
 const LoginPage = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const fromRegister = location?.state?.fromRegister;
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
-  console.log(user);
+  console.log(user, "here");
 
   useEffect(() => {
-    if (!loading && user) {
-      navigate("/products", { state: { fromLogin: true } });
-    }
-  }, [user, loading]);
-
-  if (loading) return <div>Loading...</div>;
+    if (user) navigate("/products", {});
+  }, [user, navigate]);
 
   return (
     <>
