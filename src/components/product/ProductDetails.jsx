@@ -1,15 +1,15 @@
-const ProductDetails = ({ selectedProduct }) => {
-  if (!selectedProduct) {
-    return <p>Wybierz produkt, żeby wyświetlić szczegóły</p>;
-  }
+import useSWR from "swr";
+import { fetcher } from "../../utils/fetch";
+
+const ProductDetails = ({ id }) => {
+  const {data, error, isLodaing} = useSWR(`https://fakestoreapi.com/products/${id}`, fetcher);
+  if (isLodaing) return <span>Trwa pobieranie danych produktu</span>;
+  if (error) return <span>Wystąpił błąd</span>
   return (
     <>
-    <div>
       <p>Szczegóły produktu:</p>
-      <h2 className="text-2xl">{selectedProduct.title}</h2>
-      <p>{selectedProduct.description}</p>
-      <p>Ocena: {selectedProduct.rating.rate} ({selectedProduct.rating.count})</p>
-      </div>
+      <h2 className="text-2xl">{data?.title}</h2>
+      <p>{data?.description}</p>
     </>
   );
 };
